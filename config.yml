@@ -1,1 +1,10 @@
+PATH_LOG = "log_bt.txt"
+LOG_LEVEL = "DEBUG"
 
+TEXT_COLUMN = "text"
+LABEL_COLUMN = "labels"
+
+DATA_PATH = "/Users/Antoine/Desktop/Cours/X-HEC/HEC/Cours/Quinten - drug prescription"
+
+FROM_MODEL_NAME = "Helsinki-NLP/opus-mt-fr-en"
+TO_MODEL_NAME = "Helsinki-NLP/opus-mt-en-fr"
