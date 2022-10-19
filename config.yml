@@ -1,10 +1,16 @@
-PATH_LOG = "log_bt.txt"
-LOG_LEVEL = "DEBUG"
+PATH_LOG: "log_bt.txt"
+LOG_LEVEL: "DEBUG"
 
-TEXT_COLUMN = "text"
-LABEL_COLUMN = "labels"
+TEXT_COLUMN: "text"
+LABEL_COLUMN: "labels"
 
-DATA_PATH = "/Users/Antoine/Desktop/Cours/X-HEC/HEC/Cours/Quinten - drug prescription"
+DATA_PATH: "/Users/Antoine/Desktop/Cours/X-HEC/HEC/Cours/Quinten - drug prescription"
+INPUT_PATH: "/Users/Antoine/Desktop/Cours/X-HEC/HEC/Cours/Quinten - drug prescription/trainset.jsonl"
+COLUMN_NAMES: 
+- 'id'
+- 'text'
+- 'labels'
+- 'Comments'
 
-FROM_MODEL_NAME = "Helsinki-NLP/opus-mt-fr-en"
-TO_MODEL_NAME = "Helsinki-NLP/opus-mt-en-fr"
+FROM_MODEL_NAME: "Helsinki-NLP/opus-mt-fr-en"
+TO_MODEL_NAME: "Helsinki-NLP/opus-mt-en-fr"

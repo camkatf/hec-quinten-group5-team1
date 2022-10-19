@@ -1,10 +1,12 @@
 import pandas as pd
 import os
 import yaml
-import src.Utils as u
-from src.Utils.argparser import get_args
+from tqdm import tqdm
+
+from src.antoine_utils.argparser import get_args
 import nlpaug.augmenter.word as naw
-from src.back_translation import process
+from src.antoine_utils.back_translation import process
+from src.antoine_utils.utils import read_jsonl_df, my_get_logger
 
 # Getting config
 args = get_args()
@@ -15,7 +17,7 @@ with open(config_path, "r") as file:
 # Instanciation of the logger
 path_log = config_dict.get("PATH_LOG")
 log_level = config_dict.get("LOG_LEVEL")
-logger = u.my_get_logger(path_log, log_level, my_name="bt_logger")
+logger = my_get_logger(path_log, log_level, my_name="bt_logger")
 
 
 def main(logger, config : dict):
@@ -25,11 +27,12 @@ def main(logger, config : dict):
     to_model_name = config.get('TO_MODEL_NAME')
     text_column = config.get('TEXT_COLUMN')
     label_column = config.get('LABEL_COLUMN')
+    column_names = list(config.get("COLUMN_NAMES"))
 
     logger.info("Start of the pipeline.")
 
     # Read data
-    df = pd.read_csv(input_path).loc[:1, :]
+    df = read_jsonl_df(input_path, column_names).loc[:1, :]
     logger.info("Data read.")
 
     # Load back-translation model
@@ -40,7 +43,9 @@ def main(logger, config : dict):
     logger.info("Back-translation model loaded.")
 
     # Process back-translation
-    result = df[[text_column, label_column]].apply(lambda x: process(x[0], x[1], back_translation_aug), axis=1)
+    tqdm.pandas()
+    print("Applying back-translation :")
+    result = df[[text_column, label_column]].progress_apply(lambda x: process(x[0], x[1], back_translation_aug), axis=1)
     logger.info("Back-translation ended.")
 
     # Save results

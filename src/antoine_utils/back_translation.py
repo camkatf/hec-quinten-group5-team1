@@ -2,7 +2,6 @@ import numpy as np
 import pandas as pd
 import re
 import logging
- 
 logger = logging.getLogger('bt_logger')
 
 def find_position(word, text, type):
@@ -34,10 +33,10 @@ def process(text, label_position_list, nlpaug_model):
         transformed_text (str) : back-translated text
         new_labels (list(int, int, str)) : list of positions and types of the labelled words in the back-translated text
     '''
-    logger.debug(f'Text : {text[:50]}.')
+    logger.debug(f'Text : {text[:50]}...')
 
     transformed_text= nlpaug_model.augment(text)[0]
-    logger.debug(f'Transformed text : {transformed_text[:50]}.')
+    logger.debug(f'Transformed text : {transformed_text[:50]}...')
 
     if len(label_position_list)==0:
         return transformed_text, []
@@ -61,17 +60,17 @@ def process(text, label_position_list, nlpaug_model):
         # If a labelled word is lost, we drop the back-translation
         if label not in transformed_text and label_transformed not in transformed_text :
             logger.debug('Label lost in translation.')
-            logger.debug(f"Label: {label}")
-            logger.debug(f"Transformed label: {label_transformed}")
+            logger.debug(f"Label: '{label}'.")
+            logger.debug(f"Transformed label: '{label_transformed}'.")
             return None, None
 
         elif label in transformed_text :
-            logger.debug(f'Label "{label}" found in transformed text.')
+            logger.debug(f"Label '{label}' found in transformed text.")
             new_positions = find_position(label_list[label_ind], transformed_text, type)
             new_labels += new_positions
 
         elif label_transformed in transformed_text:
-            logger.debug(f'Transformed label "{label_transformed}" found in transformed text.')
+            logger.debug(f"Transformed label '{label_transformed}' found in transformed text.")
             new_positions = find_position(transformed_labels[label_ind], transformed_text, type)
             new_labels += new_positions
 
