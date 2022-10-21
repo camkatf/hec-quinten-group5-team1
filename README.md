@@ -22,5 +22,5 @@ The resulting dataset is saved at `OUPTUT_PATH_DATA_AUG`.
   
 ## Second pipeline : model training and prediction
 This pipeline trains a model and labels the texts in the file located at `INPUT_PATH`.  
-To run this pipeline, please run the command `python main_bt_.py`.  
+To run this pipeline, please run the command `python main_bt.py`.  
 The resulting dataset is saved at `OUPTUT_PATH_MODEL`.
