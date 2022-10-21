@@ -12,6 +12,8 @@ The labels concerned are the following :
 To install all required packages, please run the command `pip install -r requirements.txt` in the terminal.  
 The configuration is to be set in the `config.yml` file.  
   
+Logs of the two pipelines are saved in the `PATH_LOG` file.    
+  
 ## First pipeline : data augmentation
 This pipeline augments the data of the `INPUT_PATH` file, using reserved words and back-translation.  
 To run this pipeline, run the two following commands:  

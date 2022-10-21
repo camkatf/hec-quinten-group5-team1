@@ -1,4 +1,4 @@
-PATH_LOG: "log_bt.txt"
+PATH_LOG: "logs.txt"
 LOG_LEVEL: "DEBUG"
 
 # Data Augmentation
