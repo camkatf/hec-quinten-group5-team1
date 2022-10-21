@@ -4,8 +4,9 @@ LOG_LEVEL: "DEBUG"
 TEXT_COLUMN: "text"
 LABEL_COLUMN: "labels"
 
-DATA_PATH: "/Users/Antoine/Desktop/Cours/X-HEC/HEC/Cours/Quinten - drug prescription"
-INPUT_PATH: "/Users/Antoine/Desktop/Cours/X-HEC/HEC/Cours/Quinten - drug prescription/trainset.jsonl"
+INPUT_PATH: "Inputs/trainset.jsonl"
+OUPTUT_PATH_DATA_AUG: "/Outputs/data_aug"
+OUPTUT_PATH_MODEL: "/Outputs/model"
 COLUMN_NAMES: 
 - 'id'
 - 'text'

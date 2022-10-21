@@ -3,10 +3,11 @@ import os
 import yaml
 from tqdm import tqdm
 
-from src.antoine_utils.argparser import get_args
+from src.Utils.argparser import get_args
 import nlpaug.augmenter.word as naw
-from src.antoine_utils.back_translation import process
-from src.antoine_utils.utils import read_jsonl_df, my_get_logger
+from src.data_augmentation.back_translation import process
+from src.Utils.utils import read_jsonl_df, my_get_logger
+from src.data_augmentation.reserved_word_augmenter import *
 
 # Getting config
 args = get_args()
@@ -22,7 +23,7 @@ logger = my_get_logger(path_log, log_level, my_name="bt_logger")
 
 def main(logger, config : dict):
     input_path = config.get("INPUT_PATH")
-    data_path = config.get("DATA_PATH")
+    output_path = config.get("OUPTUT_PATH_DATA_AUG")
     from_model_name = config.get('FROM_MODEL_NAME')
     to_model_name = config.get('TO_MODEL_NAME')
     text_column = config.get('TEXT_COLUMN')
@@ -32,8 +33,14 @@ def main(logger, config : dict):
     logger.info("Start of the pipeline.")
 
     # Read data
-    df = read_jsonl_df(input_path, column_names).loc[:1, :]
+    df = read_jsonl_df(input_path, column_names)
     logger.info("Data read.")
+
+    # Reserved word augmentation
+    df_aug = augment_reserved_word_augmentation(df[~df['labels'].isin([[]])])
+    df = read_jsonl_df(input_path, column_names)
+    df_augmented = df.append(df_aug).reset_index()
+    logger.info("Data augmented with reserved word method.")
 
     # Load back-translation model
     back_translation_aug = naw.BackTranslationAug(
@@ -45,15 +52,15 @@ def main(logger, config : dict):
     # Process back-translation
     tqdm.pandas()
     print("Applying back-translation :")
-    result = df[[text_column, label_column]].progress_apply(lambda x: process(x[0], x[1], back_translation_aug), axis=1)
+    result = df_augmented[[text_column, label_column]].progress_apply(lambda x: process(x[0], x[1], back_translation_aug), axis=1)
     logger.info("Back-translation ended.")
 
     # Save results
-    df[["transformed_text", "new_labels"]] = pd.DataFrame(result.to_list())
-    df.to_csv(os.path.join(data_path, 'data_with_bt.csv'), header=True, index=False)
+    df_augmented[["transformed_text", "new_labels"]] = pd.DataFrame(result.to_list())
+    df_augmented.to_csv(os.path.join(output_path, 'data_with_bt.csv'), header=True, index=False)
     logger.info("Results saved.")
 
-    return df.head()
+    return df_augmented.head()
 
 
 if __name__ == '__main__':

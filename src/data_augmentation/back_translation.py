@@ -14,13 +14,18 @@ def find_position(word, text, type):
         type (str) : label of the word to find
     Output : 
         (list(list(int, int, str))) : list of the position of each labelled word in the text
+                                       along with the type
     '''
-    word_length = len(word)
-    first_letter_positions = [m.start() for m in re.finditer(word, text)]
-    return [[start, start+word_length, type] for start in first_letter_positions]
+    list_label = []
+    for m in re.finditer(word, text):
+        positions = list(m.span())
+        positions.append(type)
+        list_label += [positions]
+        
+    return list_label
 
 
-def process(text, label_position_list, nlpaug_model):
+def process(text: str, label_position_list, nlpaug_model):
     '''
     Process back-translation to generate new text.
     Finds the labels in the new text.

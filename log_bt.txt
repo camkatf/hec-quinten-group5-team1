@@ -9,3 +9,165 @@
 2022-10-19 18:07:14,384 - process - DEBUG   : Label 'radiothérapie' found in transformed text.
 2022-10-19 18:07:14,405 - main - INFO    : Back-translation ended.
 2022-10-19 18:07:14,450 - main - INFO    : Results saved.
+2022-10-20 16:56:41,017 - main - INFO    : Start of the pipeline.
+2022-10-20 16:56:41,486 - main - INFO    : Data read.
+2022-10-20 16:56:53,889 - main - INFO    : Back-translation model loaded.
+2022-10-20 16:56:53,958 - process - DEBUG   : Text : Un homme âgé de 77 ans présentait des signes clini...
+2022-10-20 16:57:52,473 - process - DEBUG   : Transformed text : Un mâle de 77 ans a montré des signes cliniques de...
+2022-10-20 16:58:11,096 - process - DEBUG   : Transformed label 'blocage androgène' found in transformed text.
+2022-10-20 16:58:11,100 - <module> - ERROR   : Error during execution
+Traceback (most recent call last):
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/main_bt.py", line 61, in <module>
+    main(logger, config_dict)
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/main_bt.py", line 48, in main
+    result = df[[text_column, label_column]].progress_apply(lambda x: process(x[0], x[1], back_translation_aug), axis=1)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/tqdm/std.py", line 814, in inner
+    return getattr(df, df_function)(wrapper, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/pandas/core/frame.py", line 8736, in apply
+    return op.apply()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/pandas/core/apply.py", line 688, in apply
+    return self.apply_standard()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/pandas/core/apply.py", line 805, in apply_standard
+    results, res_index = self.apply_series_generator()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/pandas/core/apply.py", line 821, in apply_series_generator
+    results[i] = self.f(v)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/tqdm/std.py", line 809, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/main_bt.py", line 48, in <lambda>
+    result = df[[text_column, label_column]].progress_apply(lambda x: process(x[0], x[1], back_translation_aug), axis=1)
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/src/antoine_utils/back_translation.py", line 72, in process
+    logger.debug(f"Transformed label '{label_transformed}' found in transformed text.")
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/src/antoine_utils/back_translation.py", line 18, in find_position
+    '''
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/src/antoine_utils/back_translation.py", line 18, in <listcomp>
+    '''
+TypeError: 're.Match' object is not iterable
+2022-10-20 17:15:04,554 - main - INFO    : Start of the pipeline.
+2022-10-20 17:15:05,493 - main - INFO    : Data read.
+2022-10-20 17:15:45,855 - main - INFO    : Back-translation model loaded.
+2022-10-20 17:15:46,068 - process - DEBUG   : Text : Un homme âgé de 77 ans présentait des signes clini...
+2022-10-20 17:19:24,245 - process - DEBUG   : Transformed text : Un mâle de 77 ans a montré des signes cliniques de...
+2022-10-20 17:20:02,057 - process - DEBUG   : Transformed label 'blocage androgène' found in transformed text.
+2022-10-20 17:20:02,087 - process - DEBUG   : Text : Mr. R,R âgé de 53 ans sans antécédents pathologiqu...
+2022-10-20 17:23:23,993 - process - DEBUG   : Transformed text : L'examen clinique n'était pas inhabituel. Le touch...
+2022-10-20 17:24:04,271 - process - DEBUG   : Label 'radiothérapie' found in transformed text.
+2022-10-20 17:24:04,511 - main - INFO    : Back-translation ended.
+2022-10-20 17:24:04,831 - main - INFO    : Results saved.
+2022-10-21 11:40:16,254 - main - INFO    : Start of the pipeline.
+2022-10-21 11:40:16,255 - <module> - ERROR   : Error during execution
+Traceback (most recent call last):
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/main_bt.py", line 67, in <module>
+    main(logger, config_dict)
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/main_bt.py", line 36, in main
+    df = read_jsonl_df(input_path, column_names)
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/src/Utils/utils.py", line 52, in read_jsonl_df
+    with open(input_path, 'r') as json_file:
+FileNotFoundError: [Errno 2] No such file or directory: '/Inputs/trainset.jsonl'
+2022-10-21 11:41:35,376 - main - INFO    : Start of the pipeline.
+2022-10-21 11:41:35,634 - main - INFO    : Data read.
+2022-10-21 11:41:35,651 - <module> - ERROR   : Error during execution
+Traceback (most recent call last):
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/main_bt.py", line 68, in <module>
+    main(logger, config_dict)
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/main_bt.py", line 40, in main
+    df_aug = augment_reserved_word_augmentation(df[~df['labels'].isin([[]])])
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/src/data_augmentation/reserved_word_augmenter.py", line 217, in augment_reserved_word_augmentation
+    transformed_text, new_labels = process(df.iloc[row_id]['text'], df.iloc[row_id]['labels'])
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/src/data_augmentation/reserved_word_augmenter.py", line 174, in process
+    transformed_text = text.copy()
+AttributeError: 'str' object has no attribute 'copy'
+2022-10-21 11:42:55,190 - main - INFO    : Start of the pipeline.
+2022-10-21 11:42:55,418 - main - INFO    : Data read.
+2022-10-21 11:44:33,113 - <module> - ERROR   : Error during execution
+Traceback (most recent call last):
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/main_bt.py", line 68, in <module>
+    main(logger, config_dict)
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/main_bt.py", line 40, in main
+    df_aug = augment_reserved_word_augmentation(df[~df['labels'].isin([[]])])
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/src/data_augmentation/reserved_word_augmenter.py", line 217, in augment_reserved_word_augmentation
+    transformed_text, new_labels = process(df.iloc[row_id]['text'], df.iloc[row_id]['labels'])
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/src/data_augmentation/reserved_word_augmenter.py", line 174, in process
+    transformed_text = text
+AttributeError: 'str' object has no attribute 'copy'
+2022-10-21 11:45:07,592 - main - INFO    : Start of the pipeline.
+2022-10-21 11:45:07,883 - main - INFO    : Data read.
+2022-10-21 11:45:10,493 - main - INFO    : Data augmented with reserved word method.
+2022-10-21 11:45:27,597 - main - INFO    : Back-translation model loaded.
+2022-10-21 11:45:27,657 - <module> - ERROR   : Error during execution
+Traceback (most recent call last):
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/main_bt.py", line 68, in <module>
+    main(logger, config_dict)
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/main_bt.py", line 55, in main
+    result = df_augmented[[text_column, label_column]].progress_apply(lambda x: process(x[0], x[1], back_translation_aug), axis=1)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/tqdm/std.py", line 814, in inner
+    return getattr(df, df_function)(wrapper, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/pandas/core/frame.py", line 8736, in apply
+    return op.apply()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/pandas/core/apply.py", line 688, in apply
+    return self.apply_standard()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/pandas/core/apply.py", line 805, in apply_standard
+    results, res_index = self.apply_series_generator()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/pandas/core/apply.py", line 821, in apply_series_generator
+    results[i] = self.f(v)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/tqdm/std.py", line 809, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/main_bt.py", line 55, in <lambda>
+    result = df_augmented[[text_column, label_column]].progress_apply(lambda x: process(x[0], x[1], back_translation_aug), axis=1)
+TypeError: process() takes 2 positional arguments but 3 were given
+2022-10-21 11:51:53,204 - main - INFO    : Start of the pipeline.
+2022-10-21 11:51:53,332 - main - INFO    : Data read.
+2022-10-21 11:51:55,125 - main - INFO    : Data augmented with reserved word method.
+2022-10-21 11:52:09,501 - main - INFO    : Back-translation model loaded.
+2022-10-21 11:52:09,561 - process - DEBUG   : Text : Un homme âgé de 77 ans présentait des signes clini...
+2022-10-21 12:10:03,992 - main - INFO    : Start of the pipeline.
+2022-10-21 12:10:04,055 - main - INFO    : Test set imported.
+2022-10-21 12:10:04,056 - <module> - ERROR   : Error during execution
+Traceback (most recent call last):
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/main_model.py", line 59, in <module>
+    main(logger, config_dict)
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/main_model.py", line 43, in main
+    ALL_DATA=trim_entity_spans(ALL_DATA)
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/src/model/data_preprocessing.py", line 50, in trim_entity_spans
+    for text, annotations in data:
+TypeError: 'NoneType' object is not iterable
+2022-10-21 12:13:24,649 - main - INFO    : Start of the pipeline.
+2022-10-21 12:13:24,700 - main - INFO    : Test set imported.
+2022-10-21 12:13:24,701 - <module> - ERROR   : Error during execution
+Traceback (most recent call last):
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/main_model.py", line 59, in <module>
+    main(logger, config_dict)
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/main_model.py", line 43, in main
+    ALL_DATA=trim_entity_spans(ALL_DATA)
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/src/model/data_preprocessing.py", line 50, in trim_entity_spans
+    for text, annotations in data:
+TypeError: 'NoneType' object is not iterable
+2022-10-21 12:13:55,662 - main - INFO    : Start of the pipeline.
+2022-10-21 12:13:55,698 - main - INFO    : Test set imported.
+2022-10-21 12:18:49,326 - main - INFO    : Start of the pipeline.
+2022-10-21 12:18:49,379 - main - INFO    : Test set imported.
+2022-10-21 12:18:49,381 - <module> - ERROR   : Error during execution
+Traceback (most recent call last):
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/main_model.py", line 60, in <module>
+    main(logger, config_dict)
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/main_model.py", line 44, in main
+    ALL_DATA=trim_entity_spans(ALL_DATA)
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/src/model/data_preprocessing.py", line 50, in trim_entity_spans
+    for text, annotations in data:
+TypeError: 'NoneType' object is not iterable
+2022-10-21 12:20:32,542 - main - INFO    : Start of the pipeline.
+2022-10-21 12:20:32,595 - main - INFO    : Test set imported.
+2022-10-21 12:20:32,677 - <module> - ERROR   : Error during execution
+Traceback (most recent call last):
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/main_model.py", line 60, in <module>
+    main(logger, config_dict)
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/main_model.py", line 48, in main
+    prdnlp = train_spacy(ALL_DATA, 1)
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/src/model/train.py", line 25, in train_spacy
+    nlp = spacy.load(model)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/spacy/__init__.py", line 54, in load
+    return util.load_model(
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/spacy/util.py", line 439, in load_model
+    raise IOError(Errors.E050.format(name=name))
+OSError: [E050] Can't find model 'fr_core_news_lg'. It doesn't seem to be a Python package or a valid path to a data directory.
+2022-10-21 12:28:17,026 - main - INFO    : Start of the pipeline.
+2022-10-21 12:28:17,061 - main - INFO    : Test set imported.

@@ -4,3 +4,4 @@ torch==1.12.1
 transformers==4.23.1
 sacremoses==0.0.53
 sentencepiece==0.1.97
+spacy==3.4.2
