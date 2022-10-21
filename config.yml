@@ -1,1 +1,21 @@
+PATH_LOG: "logs.txt"
+LOG_LEVEL: "DEBUG"
 
+# Data Augmentation
+INPUT_PATH: "Inputs/trainset.jsonl"
+OUPTUT_PATH_DATA_AUG: "/Outputs/data_aug/data_with_bt.csv"
+
+TEXT_COLUMN: "text"
+LABEL_COLUMN: "labels"
+COLUMN_NAMES: 
+- 'id'
+- 'text'
+- 'labels'
+- 'Comments'
+
+FROM_MODEL_NAME: "Helsinki-NLP/opus-mt-fr-en"
+TO_MODEL_NAME: "Helsinki-NLP/opus-mt-en-fr"
+
+# Model training and predictions
+TEST_SET_PATH: "/Inputs/test.csv"
+OUPTUT_PATH_MODEL: "/Outputs/model/predictions.csv"

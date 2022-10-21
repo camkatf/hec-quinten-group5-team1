@@ -1,8 +1,12 @@
-# -*- coding: utf-8 -*-
-import logging
-import pickle
-logger = logging.getLogger('main_logger')
 
+# -*- coding: utf-8 -*-
+import json
+from stat import filemode
+import numpy as np
+import pandas as pd
+from tqdm import tqdm
+import logging
+logger = logging.getLogger('bt_logger')
 
 def my_get_logger(path_log, log_level, my_name =""):
     """
@@ -11,10 +15,6 @@ def my_get_logger(path_log, log_level, my_name =""):
     :param log_level: Niveau du log
     :return: Fichier de log
     """
-    
-    #print(path_log)
-    #print(log_level)
-    
     log_level_dict = {"CRITICAL": logging.CRITICAL,
                         "ERROR": logging.ERROR,
                         "WARNING": logging.WARNING,
@@ -22,7 +22,6 @@ def my_get_logger(path_log, log_level, my_name =""):
                         "DEBUG": logging.DEBUG}
     
     LOG_LEVEL = log_level_dict[log_level]
-    #print(LOG_LEVEL)
 
     if my_name != "":
         logger = logging.getLogger(my_name)
@@ -33,6 +32,7 @@ def my_get_logger(path_log, log_level, my_name =""):
     
     # create a file handler
     handler = logging.FileHandler(path_log)
+    #, mode="w"
     handler.setLevel(LOG_LEVEL)
 
     # create a logging format
@@ -45,23 +45,26 @@ def my_get_logger(path_log, log_level, my_name =""):
     return logger
 
 
-def save_model(clf, conf, name =""):
-    if len(name)==0:
-        name = conf['selected_dataset']+'_'+conf['selected_model']
-    filename = conf["paths"]["Outputs_path"]+conf["paths"]["folder_models"] + name+'.sav'
-    pickle.dump(clf, open(filename, 'wb'))
-    logger.info('Modele sauvergardé: ' + filename)
-    return 'OK'
+def read_jsonl_df(input_path: str, column_names: list) -> pd.DataFrame:
+    '''
+    Read .jsonl input and convert it to pd.dataframe
+    '''
+    with open(input_path, 'r') as json_file:
+        json_list = list(json_file)
+    
+    list_columns = []
+    for n, val in enumerate(column_names):
+        globals()[f"{val}"] = []
+        list_columns += [globals()[f"{val}"]]
 
-def load_model(conf,name=""):
-    if len(name)==0:
-        name = conf['selected_dataset']+'_'+conf['selected_model']
-    filename = conf["paths"]["Outputs_path"]+conf["paths"]["folder_models"] + name+'.sav'
-    print(filename)
-    clf = pickle.load( open(filename, 'rb'))
-    logger.info('Modele chargé: ' + filename)
-    return clf
+    print("Converting jsonl file :")
+    for json_str in tqdm(json_list):
+        result = json.loads(json_str)
 
-def get_y_column_from_conf(conf):
+        for i in range(len(list_columns)):
+            list_columns[i] += [result[column_names[i]]]
 
-    return conf["dict_info_files"][conf['selected_dataset']]["y_name"]
+    df = pd.DataFrame(list_columns).T
+    df.columns = column_names
+
+    return df
