@@ -57,7 +57,7 @@ def main(logger, config : dict):
 
     # Save results
     df_augmented[["transformed_text", "new_labels"]] = pd.DataFrame(result.to_list())
-    df_augmented.to_csv(os.path.join(output_path, 'data_with_bt.csv'), header=True, index=False)
+    df_augmented.to_csv(output_path, header=True, index=False)
     logger.info("Results saved.")
 
     return df_augmented.head()
