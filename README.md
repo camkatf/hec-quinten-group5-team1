@@ -1,4 +1,4 @@
-# Name entity recognition of medical report
+# Name Entity Recognition of medical report
 This repository aims at spotting automatically the main elements of medical reports.  
 The labels concerned are the following :
 - Treatment
