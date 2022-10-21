@@ -17,6 +17,7 @@ This pipeline augments the data of the `INPUT_PATH` file, using reserved words a
 To run this pipeline, run the two following commands:  
 - `python -m spacy download fr_core_news_lg`  
 - `python main_model.py`  
+  
 The resulting dataset is saved at `OUPTUT_PATH_DATA_AUG`.  
   
 ## Second pipeline : model training and prediction
