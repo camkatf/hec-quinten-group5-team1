@@ -171,3 +171,21 @@ Traceback (most recent call last):
 OSError: [E050] Can't find model 'fr_core_news_lg'. It doesn't seem to be a Python package or a valid path to a data directory.
 2022-10-21 12:28:17,026 - main - INFO    : Start of the pipeline.
 2022-10-21 12:28:17,061 - main - INFO    : Test set imported.
+2022-10-21 14:14:10,522 - main - INFO    : Start of the pipeline.
+2022-10-21 14:14:10,637 - main - INFO    : Train dataset imported and preprocessed.
+2022-10-21 14:16:16,144 - main - INFO    : Model trained on train dataset.
+2022-10-21 14:16:16,217 - main - INFO    : Test dataset imported.
+2022-10-21 14:16:45,662 - <module> - ERROR   : Error during execution
+Traceback (most recent call last):
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/main_model.py", line 54, in <module>
+  File "/Users/Antoine/data_science_projects/3_nlp/drug_prescription_understanding/main_model.py", line 47, in main
+    predict_test(prdnlp, test_text).to_csv(output_path, index=False, header=True)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/pandas/core/generic.py", line 3463, in to_csv
+    return DataFrameRenderer(formatter).to_csv(
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/pandas/io/formats/format.py", line 1105, in to_csv
+    csv_formatter.save()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/pandas/io/formats/csvs.py", line 237, in save
+    with get_handle(
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/pandas/io/common.py", line 701, in get_handle
+    handle = open(
+FileNotFoundError: [Errno 2] No such file or directory: '/Outputs/data_aug'

@@ -6,7 +6,9 @@ LABEL_COLUMN: "labels"
 
 INPUT_PATH: "Inputs/trainset.jsonl"
 OUPTUT_PATH_DATA_AUG: "/Outputs/data_aug"
-OUPTUT_PATH_MODEL: "/Outputs/model"
+OUPTUT_PATH_MODEL: "/Outputs/model/predictions.csv"
+TEST_SET_PATH: "/Inputs/test.csv"
+
 COLUMN_NAMES: 
 - 'id'
 - 'text'
